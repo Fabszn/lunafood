@@ -2,9 +2,8 @@ package com.luna.food.resources;
 
 import com.luna.food.entities.Article;
 import com.luna.food.services.ArticleService;
-import com.luna.food.services.ArticleServiceImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -40,12 +39,16 @@ public class ArticleResource {
         return articleService.removeArticleById(id);
     }
 
+    @Inject
+    @Channel("article-stream") Emitter<Article> emitter;
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public String createArticles(Article article) {
 
-        articleService.addArticle(article);
-        return "Created";
+        long newId = articleService.addArticle(article);
+        emitter.send(article);
+        return "Created" + newId;
     }
 
 }

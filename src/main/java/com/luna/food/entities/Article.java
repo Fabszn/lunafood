@@ -1,17 +1,18 @@
 package com.luna.food.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.persistence.Entity;
 
 @Entity
 public class Article extends PanacheEntity {
 
+
     private String name;
     private String type;
 
-    public Article() {
-    }
+    public Article() {}
 
     public Article(String name, String type) {
         this.name = name;

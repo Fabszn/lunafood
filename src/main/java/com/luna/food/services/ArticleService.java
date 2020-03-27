@@ -8,8 +8,10 @@ import java.util.Optional;
 public interface ArticleService {
 
     List<Article> getAllArticles();
+
     Optional<Article> getArticleById(Long id);
+
     long removeArticleById(Long id);
 
-    void addArticle(Article article);
+    long addArticle(Article article);
 }

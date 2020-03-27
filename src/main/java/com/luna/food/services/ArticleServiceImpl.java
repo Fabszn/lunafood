@@ -21,8 +21,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Transactional
-    public void addArticle(Article article){
+    public long addArticle(Article article) {
+
         Article.persist(article);
+        return article.id;
     }
 
     @Override
