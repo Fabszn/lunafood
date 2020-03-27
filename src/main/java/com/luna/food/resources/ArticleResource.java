@@ -48,7 +48,7 @@ public class ArticleResource {
 
         long newId = articleService.addArticle(article);
         emitter.send(article);
-        return "Created" + newId;
+        return "Created " + newId;
     }
 
 }
